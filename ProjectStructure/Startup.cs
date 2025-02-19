@@ -111,9 +111,11 @@ namespace ProjectStructure
     {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
-        {
-          /// // services.AddTransient<ApllicationDbContext>();
+      
+        
+        ///  public void ConfigureServices(IServiceCollection services)
+      ///  {
+      ///    /// // services.AddTransient<ApllicationDbContext>();
           ///  //services.AddSingleton<CategoryRepository>();    
           ///  services.AddScoped<ApplicationDbContext>(option =>
           ///  {
@@ -122,45 +124,46 @@ namespace ProjectStructure
           ///  services.AddScoped<CategoryRepository>();
           ///  services.AddScoped<ProductRepository>();
           ///  
-        
-        
-        services.AddControllersWithViews(); 
-           /// services.AddMvc();
+      ///  
+      ///  
+      ///  services.AddControllersWithViews(); 
+      ///     /// services.AddMvc();
            /// services.AddControllers();
            /// services.AddRazorPages();   
-        }
+      ///  }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
-
-                endpoints.MapGet("/Hamada", async context =>
-                {
-                    await context.Response.WriteAsync("Hello Hamada!");
-                });
-
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action}/{id?}"
-
-                    );
-
-
-            });
-           
-        }
+       
+      ///public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+      ///{
+      ///    if (env.IsDevelopment())
+      ///    {
+      ///        app.UseDeveloperExceptionPage();
+      ///    }
+      ///
+      ///    app.UseRouting();
+      ///
+      ///    app.UseEndpoints(endpoints =>
+      ///    {
+      ///        endpoints.MapGet("/", async context =>
+      ///        {
+      ///            await context.Response.WriteAsync("Hello World!");
+      ///        });
+      ///
+      ///        endpoints.MapGet("/Hamada", async context =>
+      ///        {
+      ///            await context.Response.WriteAsync("Hello Hamada!");
+      ///        });
+      ///
+      ///        endpoints.MapControllerRoute(
+      ///            name: "default",
+      ///            pattern: "{controller}/{action}/{id?}"
+      ///
+      ///            );
+      ///
+      ///
+      ///    });
+      ///   
+      ///}
     }
 }

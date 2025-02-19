@@ -1,26 +1,52 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace ProjectStructure
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+            var webApplicationBuilder = WebApplication.CreateBuilder();
+
+            #region Configure Service 
+
+            webApplicationBuilder.Services.AddControllersWithViews(); 
+
+            #endregion
+
+            var app= webApplicationBuilder.Build();
+
+            #region Configure 
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseStatusCodePagesWithReExecute("/Home/Error");
+            }
+
+            app.UseRouting();
+
+           
+                app.MapGet("/", async context =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    await context.Response.WriteAsync("Hello World!");
                 });
-    }
-}
+
+                app.MapGet("/Hamada", async context =>
+                {
+                    await context.Response.WriteAsync("Hello Hamada!");
+                });
+
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller}/{action}/{id?}");
+
+                    
+                #endregion
+
+                app.Run();
+
+
+           
+      
